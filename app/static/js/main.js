@@ -77,7 +77,7 @@ function renderFolders() {
         folderCard.innerHTML = `
             <div class="flex items-center justify-between mb-4">
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-white">${folder.name}</h4>
-                <button class="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+                <button class="new-project-btn p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white" data-folder-id="${folder.id}">
                     <i class="lucide lucide-plus"></i>
                 </button>
             </div>
@@ -86,9 +86,14 @@ function renderFolders() {
                     <div class="project-item bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
                         <div class="flex items-center justify-between">
                             <span class="text-gray-700 dark:text-gray-300">${project.name}</span>
-                            <button class="toggle-expand p-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white" data-project-id="${project.id}">
-                                <i class="lucide lucide-chevron-down"></i>
-                            </button>
+                            <div class="flex space-x-2">
+                                <button class="new-subproject-btn p-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white" data-project-id="${project.id}">
+                                    <i class="lucide lucide-plus"></i>
+                                </button>
+                                <button class="toggle-expand p-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white" data-project-id="${project.id}">
+                                    <i class="lucide lucide-chevron-down"></i>
+                                </button>
+                            </div>
                         </div>
                         ${project.subprojects && project.subprojects.length > 0 ? `
                             <div class="subprojects mt-2 space-y-2" id="subprojects-${project.id}">
@@ -107,6 +112,23 @@ function renderFolders() {
             </div>
         `;
         foldersGrid.appendChild(folderCard);
+    });
+
+    // Agregar event listeners para los botones de nuevo proyecto y subproyecto
+    document.querySelectorAll('.new-project-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const folderId = e.currentTarget.dataset.folderId;
+            document.getElementById('newProjectBtn').dataset.folderId = folderId;
+            showDialog('newProjectDialog');
+        });
+    });
+
+    document.querySelectorAll('.new-subproject-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const projectId = e.currentTarget.dataset.projectId;
+            document.getElementById('newSubprojectBtn').dataset.projectId = projectId;
+            showDialog('newSubprojectDialog');
+        });
     });
 }
 

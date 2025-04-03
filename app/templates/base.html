@@ -159,6 +159,46 @@
         </div>
     </div>
 
+    <!-- Diálogos Modales -->
+    <!-- Diálogo Nueva Carpeta -->
+    <div id="newFolderDialog" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-96">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Nueva Carpeta</h3>
+                <input type="text" id="folderName" class="w-full p-2 border rounded-lg mb-4" placeholder="Nombre de la carpeta">
+                <div class="flex justify-end space-x-4">
+                    <button id="cancelNewFolder" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+                        Cancelar
+                    </button>
+                    <button id="saveNewFolder" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diálogo Nuevo Proyecto -->
+    <div id="newProjectDialog" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-96">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Nuevo Proyecto</h3>
+                <input type="text" id="projectName" class="w-full p-2 border rounded-lg mb-4" placeholder="Nombre del proyecto">
+                <input type="date" id="projectStartDate" class="w-full p-2 border rounded-lg mb-4">
+                <input type="date" id="projectEndDate" class="w-full p-2 border rounded-lg mb-4">
+                <div class="flex justify-end space-x-4">
+                    <button id="cancelNewProject" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
+                        Cancelar
+                    </button>
+                    <button id="saveNewProject" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dialogs.js') }}"></script>
 </body>
 </html> 

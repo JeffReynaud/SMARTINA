@@ -11,8 +11,12 @@ class Config:
     
     # Configuración de la aplicación
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev')
-    DEBUG = os.getenv('FLASK_ENV', 'development') == 'development'
+    DEBUG = os.getenv('FLASK_ENV', 'production') == 'development'
     
     # Configuración de la API
     JSON_AS_ASCII = False
-    JSON_SORT_KEYS = False 
+    JSON_SORT_KEYS = False
+    
+    # Configuración de Render
+    HOST = '0.0.0.0'
+    PORT = int(os.environ.get('PORT', 10000)) 
