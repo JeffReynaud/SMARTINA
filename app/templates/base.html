@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTINA - Vista Gantt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <h1>SMARTINA</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="gantt-container">
+            <div class="gantt-header">
+                <div class="controls">
+                    <button class="button" id="prevMonth">←</button>
+                    <h2 id="currentMonth">Enero 2024</h2>
+                    <button class="button" id="nextMonth">→</button>
+                </div>
+                <div class="controls">
+                    <button class="button" id="viewMonth">Mes</button>
+                    <button class="button" id="viewWeek">Semana</button>
+                </div>
+            </div>
+
+            <div class="gantt-timeline" id="ganttTimeline">
+                <!-- Aquí se generará dinámicamente el contenido del Gantt -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 SMARTINA - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

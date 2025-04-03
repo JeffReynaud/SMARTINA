@@ -1,0 +1,124 @@
+/* Variables globales de Apple */
+:root {
+    /* Colores principales de Apple */
+    --apple-blue: #007AFF;
+    --apple-green: #34C759;
+    --apple-orange: #FF9500;
+    --apple-red: #FF3B30;
+    --apple-purple: #AF52DE;
+    --apple-gray-1: #8E8E93;
+    --apple-gray-2: #AEAEB2;
+    --apple-gray-3: #C7C7CC;
+    --apple-gray-4: #D1D1D6;
+    --apple-gray-5: #E5E5EA;
+    --apple-gray-6: #F2F2F7;
+    
+    /* Tipografía */
+    --apple-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Espaciado */
+    --apple-spacing-xs: 4px;
+    --apple-spacing-sm: 8px;
+    --apple-spacing-md: 16px;
+    --apple-spacing-lg: 24px;
+    --apple-spacing-xl: 32px;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--apple-font);
+    line-height: 1.5;
+    color: #1D1D1F;
+    background-color: #FFFFFF;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--apple-spacing-md);
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #F5F5F7;
+    padding: var(--apple-spacing-md);
+    border-bottom: 1px solid var(--apple-gray-5);
+}
+
+/* Vista Gantt */
+.gantt-container {
+    margin-top: var(--apple-spacing-lg);
+    overflow-x: auto;
+}
+
+.gantt-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--apple-spacing-md);
+}
+
+.gantt-timeline {
+    display: grid;
+    grid-template-columns: 200px repeat(auto-fill, minmax(50px, 1fr));
+    gap: 1px;
+    background-color: var(--apple-gray-5);
+}
+
+.gantt-item {
+    padding: var(--apple-spacing-sm);
+    background-color: white;
+    border-bottom: 1px solid var(--apple-gray-5);
+}
+
+.gantt-bar {
+    height: 24px;
+    border-radius: 4px;
+    margin: 2px 0;
+}
+
+/* Estados de las tareas */
+.status-backlog { background-color: var(--apple-gray-1); }
+.status-in-progress { background-color: var(--apple-blue); }
+.status-ready-for-review { background-color: var(--apple-orange); }
+.status-done { background-color: var(--apple-green); }
+
+/* Controles */
+.controls {
+    display: flex;
+    gap: var(--apple-spacing-sm);
+    margin-bottom: var(--apple-spacing-md);
+}
+
+.button {
+    padding: var(--apple-spacing-sm) var(--apple-spacing-md);
+    border-radius: 8px;
+    border: none;
+    background-color: var(--apple-blue);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #0062CC;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--apple-spacing-sm);
+    }
+    
+    .gantt-timeline {
+        grid-template-columns: 150px repeat(auto-fill, minmax(40px, 1fr));
+    }
+} 
