@@ -1,0 +1,34 @@
+# Este es un archivo de ejemplo que muestra cómo usar el archivo CODEOWNERS.
+# Los propietarios serán solicitados para revisión cuando alguien abra un pull request.
+
+# Estos propietarios serán los propietarios predeterminados para todo en el repositorio.
+*       @JeffReynaud
+
+# Orden de los archivos de configuración
+/.github/           @JeffReynaud
+/requirements*.txt  @JeffReynaud
+/setup.py          @JeffReynaud
+
+# Orden de los archivos de documentación
+/docs/             @JeffReynaud
+/README.md         @JeffReynaud
+/LICENSE           @JeffReynaud
+/CHANGELOG.md      @JeffReynaud
+/CONTRIBUTING.md   @JeffReynaud
+/SECURITY.md       @JeffReynaud
+
+# Orden de los archivos de pruebas
+/tests/            @JeffReynaud
+
+# Orden de los archivos de configuración de Docker
+/Dockerfile        @JeffReynaud
+/docker-compose.yml @JeffReynaud
+/.dockerignore     @JeffReynaud
+
+# Orden de los archivos de configuración de Python
+/.editorconfig     @JeffReynaud
+/.flake8           @JeffReynaud
+/.isort.cfg        @JeffReynaud
+/.mypy.ini         @JeffReynaud
+/pytest.ini        @JeffReynaud
+/.pre-commit-config.yaml @JeffReynaud 

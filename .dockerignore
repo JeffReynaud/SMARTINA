@@ -1,9 +1,8 @@
-# Entorno virtual
-venv/
-env/
-ENV/
+# Git
+.git
+.gitignore
 
-# Archivos de Python
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -25,14 +24,15 @@ wheels/
 .installed.cfg
 *.egg
 
+# Entorno virtual
+venv/
+env/
+ENV/
+
 # Archivos de entorno
 .env
 .env.local
 .env.*.local
-
-# Base de datos
-*.db
-*.sqlite3
 
 # Archivos de IDE
 .idea/
@@ -42,4 +42,17 @@ wheels/
 
 # Archivos de sistema
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Archivos de pruebas
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Archivos de documentación
+docs/_build/
+
+# Archivos de Docker
+Dockerfile
+docker-compose.yml
+.dockerignore 

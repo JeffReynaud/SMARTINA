@@ -1,0 +1,25 @@
+name: "Close stale issues and PRs"
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-message: 'Este issue ha estado inactivo por 30 días. Se cerrará en 7 días si no hay actividad.'
+        stale-pr-message: 'Este pull request ha estado inactivo por 30 días. Se cerrará en 7 días si no hay actividad.'
+        stale-issue-label: 'wontfix'
+        stale-pr-label: 'wontfix'
+        days-before-stale: 30
+        days-before-close: 7
+        exempt-issue-labels: 'pinned,documentation'
+        exempt-pr-labels: 'pinned,documentation'
+        only-issue-labels: ''
+        only-pr-labels: ''
+        operations-per-run: 30
+        remove-stale-when-updated: false
+        debug-only: false 

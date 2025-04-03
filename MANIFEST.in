@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include requirements.txt
+include .env.example
+include Procfile
+include wsgi.py
+recursive-include app/static *
+recursive-include app/templates * 

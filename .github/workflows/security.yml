@@ -1,0 +1,48 @@
+name: Security
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Ejecutar semanalmente
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+        pip install safety bandit
+    
+    - name: Run Safety check
+      run: |
+        safety check --full-report
+    
+    - name: Run Bandit
+      run: |
+        bandit -r . -ll
+    
+    - name: Run Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'SMARTINA'
+        path: '.'
+        format: 'HTML'
+        out: 'reports'
+    
+    - name: Upload Security Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: security-report
+        path: reports/ 

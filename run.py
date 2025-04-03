@@ -1,7 +1,12 @@
-from app import create_app
+from app import create_app, db
+from app.config import Config
 import os
 
-app = create_app()
+app = create_app(Config)
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 if __name__ == '__main__':
     # Obtener el puerto del entorno o usar 5000 por defecto

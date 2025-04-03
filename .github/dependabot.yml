@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "pip"
+      include: "scope"
+    reviewers:
+      - "JeffReynaud"
+    assignees:
+      - "JeffReynaud"
+    ignore:
+      - dependency-name: "Flask"
+        versions: ["2.3.3"]
+      - dependency-name: "Flask-SQLAlchemy"
+        versions: ["3.1.1"]
+      - dependency-name: "Flask-CORS"
+        versions: ["4.0.0"]
+      - dependency-name: "python-dotenv"
+        versions: ["1.0.0"]
+      - dependency-name: "Werkzeug"
+        versions: ["2.3.7"]
+      - dependency-name: "gunicorn"
+        versions: ["21.2.0"]
+      - dependency-name: "SQLAlchemy"
+        versions: ["2.0.23"] 
