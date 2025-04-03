@@ -22,6 +22,9 @@
     --apple-spacing-md: 16px;
     --apple-spacing-lg: 24px;
     --apple-spacing-xl: 32px;
+
+    /* Layout */
+    --sidebar-width: 240px;
 }
 
 /* Reset y estilos base */
@@ -38,31 +41,111 @@ body {
     background-color: #FFFFFF;
 }
 
-/* Contenedor principal */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--apple-spacing-md);
+/* Layout Principal */
+.app-container {
+    display: flex;
+    min-height: 100vh;
 }
 
-/* Barra de navegación */
-.navbar {
-    background-color: #F5F5F7;
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--apple-gray-6);
     padding: var(--apple-spacing-md);
+    border-right: 1px solid var(--apple-gray-5);
+}
+
+.sidebar-header {
+    padding-bottom: var(--apple-spacing-lg);
     border-bottom: 1px solid var(--apple-gray-5);
 }
 
-/* Vista Gantt */
-.gantt-container {
+.sidebar-nav ul {
+    list-style: none;
     margin-top: var(--apple-spacing-lg);
-    overflow-x: auto;
 }
 
-.gantt-header {
+.sidebar-nav li {
     display: flex;
     align-items: center;
+    padding: var(--apple-spacing-sm) var(--apple-spacing-md);
+    margin-bottom: var(--apple-spacing-sm);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar-nav li.active {
+    background-color: var(--apple-blue);
+    color: white;
+}
+
+.sidebar-nav li i {
+    margin-right: var(--apple-spacing-sm);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.main-header {
+    padding: var(--apple-spacing-md);
+    border-bottom: 1px solid var(--apple-gray-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--apple-spacing-sm);
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--apple-spacing-md);
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    flex: 1;
+    padding: var(--apple-spacing-md);
+    overflow-y: auto;
+}
+
+/* Folders Section */
+.folders-section {
+    margin-bottom: var(--apple-spacing-xl);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: var(--apple-spacing-md);
+}
+
+.folders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--apple-spacing-md);
+}
+
+/* Gantt Section */
+.gantt-section {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: var(--apple-spacing-md);
+}
+
+.gantt-container {
+    overflow-x: auto;
+    margin-top: var(--apple-spacing-lg);
 }
 
 .gantt-timeline {
@@ -91,12 +174,6 @@ body {
 .status-done { background-color: var(--apple-green); }
 
 /* Controles */
-.controls {
-    display: flex;
-    gap: var(--apple-spacing-sm);
-    margin-bottom: var(--apple-spacing-md);
-}
-
 .button {
     padding: var(--apple-spacing-sm) var(--apple-spacing-md);
     border-radius: 8px;
@@ -105,6 +182,9 @@ body {
     color: white;
     cursor: pointer;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: var(--apple-spacing-sm);
     transition: background-color 0.2s;
 }
 
@@ -112,12 +192,63 @@ body {
     background-color: #0062CC;
 }
 
+.button-secondary {
+    background-color: var(--apple-gray-5);
+    color: var(--apple-gray-1);
+}
+
+.button-secondary:hover {
+    background-color: var(--apple-gray-4);
+}
+
+/* Filter Popup */
+.filter-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.filter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: var(--apple-spacing-lg);
+    border-radius: 12px;
+    min-width: 300px;
+}
+
+.filter-options {
+    margin: var(--apple-spacing-lg) 0;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--apple-spacing-sm);
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
-    .container {
+    .sidebar {
+        width: 60px;
         padding: var(--apple-spacing-sm);
     }
-    
+
+    .sidebar-nav span {
+        display: none;
+    }
+
+    .folders-grid {
+        grid-template-columns: 1fr;
+    }
+
     .gantt-timeline {
         grid-template-columns: 150px repeat(auto-fill, minmax(40px, 1fr));
     }

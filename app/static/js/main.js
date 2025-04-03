@@ -29,6 +29,20 @@ const sampleData = {
                     ]
                 }
             ]
+        },
+        {
+            id: "2",
+            name: "Proyecto Secundario",
+            projects: [
+                {
+                    id: "p2",
+                    name: "Diseño UI/UX",
+                    startDate: "2024-01-10",
+                    endDate: "2024-01-25",
+                    status: "READY FOR REVIEW",
+                    subprojects: []
+                }
+            ]
         }
     ]
 };
@@ -37,6 +51,7 @@ const sampleData = {
 let currentDate = new Date();
 let viewMode = "month";
 let expandedProjects = {};
+let statusFilter = [];
 
 // Funciones de utilidad
 function formatDate(date) {
@@ -49,6 +64,50 @@ function getDaysInMonth(date) {
 
 function getFirstDayOfMonth(date) {
     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+}
+
+// Renderizar carpetas
+function renderFolders() {
+    const foldersGrid = document.getElementById('foldersGrid');
+    foldersGrid.innerHTML = '';
+
+    sampleData.folders.forEach(folder => {
+        const folderCard = document.createElement('div');
+        folderCard.className = 'folder-card';
+        folderCard.innerHTML = `
+            <div class="folder-header">
+                <h4>${folder.name}</h4>
+                <button class="button button-small">
+                    <i class="lucide lucide-plus"></i>
+                </button>
+            </div>
+            <div class="folder-projects">
+                ${folder.projects.map(project => `
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span>${project.name}</span>
+                            <button class="button button-small toggle-expand" data-project-id="${project.id}">
+                                <i class="lucide lucide-chevron-down"></i>
+                            </button>
+                        </div>
+                        ${project.subprojects && project.subprojects.length > 0 ? `
+                            <div class="subprojects" id="subprojects-${project.id}">
+                                ${project.subprojects.map(subproject => `
+                                    <div class="subproject-item">
+                                        <span>${subproject.name}</span>
+                                        <span class="status-badge status-${subproject.status.toLowerCase().replace(' ', '-')}">
+                                            ${subproject.status}
+                                        </span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        foldersGrid.appendChild(folderCard);
+    });
 }
 
 // Renderizar el diagrama de Gantt
@@ -93,7 +152,14 @@ function renderProject(project, container) {
     // Celda del nombre del proyecto
     const nameCell = document.createElement('div');
     nameCell.className = 'gantt-item';
-    nameCell.textContent = project.name;
+    nameCell.innerHTML = `
+        <div class="project-name">
+            <button class="toggle-expand" data-project-id="${project.id}">
+                <i class="lucide lucide-chevron-down"></i>
+            </button>
+            <span>${project.name}</span>
+        </div>
+    `;
     projectRow.appendChild(nameCell);
 
     // Celdas de días
@@ -126,22 +192,30 @@ function renderProject(project, container) {
     }
 }
 
+// Toggle project expansion
+function toggleProjectExpansion(projectId) {
+    expandedProjects[projectId] = !expandedProjects[projectId];
+    renderGantt();
+    renderFolders();
+}
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar el diagrama
+    // Inicializar vistas
+    renderFolders();
     renderGantt();
-    document.getElementById('currentMonth').textContent = formatDate(currentDate);
+    document.getElementById('currentPeriod').textContent = formatDate(currentDate);
 
     // Eventos de navegación
-    document.getElementById('prevMonth').addEventListener('click', () => {
+    document.getElementById('prevPeriod').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
-        document.getElementById('currentMonth').textContent = formatDate(currentDate);
+        document.getElementById('currentPeriod').textContent = formatDate(currentDate);
         renderGantt();
     });
 
-    document.getElementById('nextMonth').addEventListener('click', () => {
+    document.getElementById('nextPeriod').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
-        document.getElementById('currentMonth').textContent = formatDate(currentDate);
+        document.getElementById('currentPeriod').textContent = formatDate(currentDate);
         renderGantt();
     });
 
@@ -153,6 +227,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('viewWeek').addEventListener('click', () => {
         viewMode = "week";
+        renderGantt();
+    });
+
+    // Eventos de expansión de proyectos
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.toggle-expand')) {
+            const projectId = e.target.closest('.toggle-expand').dataset.projectId;
+            toggleProjectExpansion(projectId);
+        }
+    });
+
+    // Eventos de filtros
+    document.getElementById('filterButton').addEventListener('click', () => {
+        document.getElementById('filterPopup').style.display = 'block';
+    });
+
+    document.getElementById('applyFilters').addEventListener('click', () => {
+        // Implementar lógica de filtros
+        document.getElementById('filterPopup').style.display = 'none';
+    });
+
+    document.getElementById('clearFilters').addEventListener('click', () => {
+        statusFilter = [];
+        document.getElementById('filterPopup').style.display = 'none';
         renderGantt();
     });
 }); 

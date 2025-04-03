@@ -3,41 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMARTINA - Vista Gantt</title>
+    <title>SMARTINA - Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/lucide-static@0.263.0/font/lucide.css" rel="stylesheet">
 </head>
 <body>
-    <header class="navbar">
-        <div class="container">
-            <h1>SMARTINA</h1>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="gantt-container">
-            <div class="gantt-header">
-                <div class="controls">
-                    <button class="button" id="prevMonth">←</button>
-                    <h2 id="currentMonth">Enero 2024</h2>
-                    <button class="button" id="nextMonth">→</button>
-                </div>
-                <div class="controls">
-                    <button class="button" id="viewMonth">Mes</button>
-                    <button class="button" id="viewWeek">Semana</button>
-                </div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>SMARTINA</h1>
             </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <i class="lucide lucide-layout-dashboard"></i>
+                        <span>Dashboard</span>
+                    </li>
+                    <li>
+                        <i class="lucide lucide-folder"></i>
+                        <span>Carpetas</span>
+                    </li>
+                    <li>
+                        <i class="lucide lucide-calendar"></i>
+                        <span>Calendario</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
-            <div class="gantt-timeline" id="ganttTimeline">
-                <!-- Aquí se generará dinámicamente el contenido del Gantt -->
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-controls">
+                    <button class="button" id="prevPeriod">
+                        <i class="lucide lucide-chevron-left"></i>
+                    </button>
+                    <h2 id="currentPeriod">Enero 2024</h2>
+                    <button class="button" id="nextPeriod">
+                        <i class="lucide lucide-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="header-actions">
+                    <div class="view-controls">
+                        <button class="button" id="viewMonth">Mes</button>
+                        <button class="button" id="viewWeek">Semana</button>
+                    </div>
+                    <div class="filter-controls">
+                        <button class="button" id="filterButton">
+                            <i class="lucide lucide-filter"></i>
+                            Filtros
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Folders Section -->
+                <section class="folders-section">
+                    <div class="section-header">
+                        <h3>Carpetas</h3>
+                        <button class="button button-primary">
+                            <i class="lucide lucide-plus"></i>
+                            Nueva Carpeta
+                        </button>
+                    </div>
+                    <div class="folders-grid" id="foldersGrid">
+                        <!-- Las carpetas se cargarán dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- Gantt View -->
+                <section class="gantt-section">
+                    <div class="gantt-container">
+                        <div class="gantt-timeline" id="ganttTimeline">
+                            <!-- El diagrama de Gantt se generará dinámicamente -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Filter Popup -->
+    <div class="filter-popup" id="filterPopup">
+        <div class="filter-content">
+            <h3>Filtros</h3>
+            <div class="filter-options">
+                <!-- Las opciones de filtro se cargarán dinámicamente -->
+            </div>
+            <div class="filter-actions">
+                <button class="button" id="applyFilters">Aplicar</button>
+                <button class="button button-secondary" id="clearFilters">Limpiar</button>
             </div>
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>© 2024 SMARTINA - Todos los derechos reservados</p>
-        </div>
-    </footer>
+    </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
