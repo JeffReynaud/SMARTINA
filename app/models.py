@@ -1,7 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
+from app import db
 from datetime import datetime
-
-db = SQLAlchemy()
 
 class Folder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,9 +28,10 @@ class Project(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'startDate': self.start_date.strftime('%Y-%m-%d'),
-            'endDate': self.end_date.strftime('%Y-%m-%d'),
+            'start_date': self.start_date.strftime('%Y-%m-%d'),
+            'end_date': self.end_date.strftime('%Y-%m-%d'),
             'status': self.status,
+            'folder_id': self.folder_id,
             'subprojects': [subproject.to_dict() for subproject in self.subprojects]
         }
 
@@ -49,7 +48,8 @@ class Subproject(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'startDate': self.start_date.strftime('%Y-%m-%d'),
-            'endDate': self.end_date.strftime('%Y-%m-%d'),
-            'status': self.status
+            'start_date': self.start_date.strftime('%Y-%m-%d'),
+            'end_date': self.end_date.strftime('%Y-%m-%d'),
+            'status': self.status,
+            'project_id': self.project_id
         } 
