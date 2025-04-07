@@ -16,4 +16,8 @@ def create_app(config_class):
     from app.routes import main
     app.register_blueprint(main)
     
+    # Crear tablas de la base de datos
+    with app.app_context():
+        db.create_all()
+    
     return app 

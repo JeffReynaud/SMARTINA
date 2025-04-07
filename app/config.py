@@ -7,11 +7,13 @@ load_dotenv()
 class Config:
     # Configuración de la base de datos
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///smartina.db')
+    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Configuración de la aplicación
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev')
-    DEBUG = os.getenv('FLASK_ENV', 'production') == 'development'
+    DEBUG = False  # Siempre False en producción
     
     # Configuración de la API
     JSON_AS_ASCII = False
