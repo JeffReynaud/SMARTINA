@@ -10,7 +10,7 @@ setup(
         'Flask-SQLAlchemy==3.1.1',
         'Flask-CORS==4.0.0',
         'python-dotenv==1.0.0',
-        'Werkzeug==2.3.7',
+        'Werkzeug==3.1.3',
         'gunicorn==21.2.0',
         'SQLAlchemy==2.0.23',
     ],
